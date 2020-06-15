@@ -328,6 +328,6 @@ Suppose we want to estimate the average value of the state at time $$t$$ . In th
       $$\sum_{i=1}^{N} \frac{1}{\sum_{n=1}^{N} w^{(n)}_{0:t}} h(x_{0:t}^{(i)}) \frac{g(y_{t} | x^{(n)}_{t})\pi(x^{(n)}_{0:t}| y_{0:t-1})}{q(x^{(n)}_{0:t} | y_{0:t})} = \sum_{i=1}^{N} \frac{1}{\sum_{n=1}^{N} w^{(n)}_{0:t}} h(x_{0:t}^{(i)}) w^{(n)}_{0:t}$$
       
 
-Of course, this will require that we be able to evaluate $$\pi(x^{(n)}_{0:t}| y_{0:t-1})$$, which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $$t=0$$ , in which we _can_ evaluate $$ \pi(x^{(n)}_{0}) $$, then work recursively to build up to higher dimensions (more on this in future posts).
+Of course, this will require that we be able to evaluate $$\pi(x^{(n)}\_{0:t}| y\_{0:t-1})$$, which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $$t=0$$ , in which we _can_ evaluate $$ \pi(x^{(n)}\_{0}) $$, then work recursively to build up to higher dimensions (more on this in future posts).
 
 {% include lib/mathjax.html %}
