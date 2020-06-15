@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Modeling non-linear time series with particle filtering!
+title: Modeling Non-Linear Time Series With Particle Filtering Part II (Importance Sampling)
 ---
 
 This post is primarily about importance sampling, which plays an important role (sorry about the pun) in the particle filter. There is an insane amount of resources on the subject of Monte Carlo methods. I, by no means, intend to give a full description. My goal is to describe a couple of basic ideas I've picked up over the past year and relate them to the previous post. My view of Monte Carlo methods is strictly limited to their use in Bayesian statistics, but they can be used in many other places.
