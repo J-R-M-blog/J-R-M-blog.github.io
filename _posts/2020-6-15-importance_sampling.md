@@ -199,7 +199,11 @@ $$
 \pi(\theta | x) = \frac{f(x | \theta) \pi(\theta)}{\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta}
 $$
 
-What!? How do you compute $$\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta$$ analytically? This is going to be a problem in our importance sampler estimator, even if $$\theta \sim q(\theta)$$ is easy to sample from:
+What!? How do you compute 
+
+$$\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta$$ 
+
+analytically? This is going to be a problem in our importance sampler estimator, even if $$\theta \sim q(\theta)$$ is easy to sample from:
 
 $$
 \frac{1}{N} \frac{1}{\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta}  \sum_{n=1}^{N} \frac{h(\theta^{(n)})f(x | \theta^{(n)}) \pi(\theta^{(n)})}{q(\theta^{(n)})}
