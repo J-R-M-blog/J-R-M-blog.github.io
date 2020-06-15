@@ -307,17 +307,17 @@ $$
 
 In other words, we cannot practically compute 
 
-$$\pi(y_{t} | y_{0:t-1})$$ .
+$$\pi(y_{t} | y_{0:t-1})$$ 
 
 Consequently, we cannot sample from the target distribution either. That's fine, we can use the self-normalized importance sampler!
 
 Suppose we want to estimate the average value of the state at time $$t$$ . In this case, 
 
-$$h(X_{0:t}) = X_{0:t}$$ ,
+$$h(X_{0:t}) = X_{0:t}$$ 
 
 (remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution 
 
-$$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ ,
+$$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ 
 
 (it does not have to depend on $$y_{0:t}$$ , but it can). Perform the following:
 
@@ -342,7 +342,7 @@ $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ ,
 
 Of course, this will require that we be able to evaluate 
 
-$$\pi(x_{0:t}^{(n)}| y_{0:t-1})$$ ,
+$$\pi(x_{0:t}^{(n)}| y_{0:t-1})$$ 
 
 which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $$t=0$$ , in which we _can_ evaluate $$\pi(x_0^{(n)})$$ and work recursively to build up to higher dimensions (more on this in future posts).
 
