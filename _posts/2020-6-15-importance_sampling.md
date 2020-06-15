@@ -15,8 +15,8 @@ This is $$E\left\{ln(X^2)\right\}$$, where $$X \sim \mathcal{N}(0,1)$$. This see
 
 1. First,
       * sample $$X^{(n)} \sim \mathcal{N}(0,1)$$, for $$n = 1,\ldots, N$$
-2. Compute, 
-      * $$\frac{1}{N}\sum_{n=1}^{N} \ln\{(x^{(n)})^2\}$$
+2. Then, 
+      * compute $$\frac{1}{N}\sum_{n=1}^{N} \ln\{(x^{(n)})^2\}$$
 
 
 We can compute this integral in Python:
@@ -76,7 +76,7 @@ $$
 V\left\{\frac{1}{N}\sum_{n=1}^{N} h(X^{(n)})\right\} = \frac{1}{N}V\left\{h(X^{(1)})\right\}
 $$
 
-We will assume $V\left\{h(X^{(1)})\right\} < \infty$. Furthermore, by the Central Limit Theorem
+We will assume $$ V\left\{h(X^{(1)})\right\} < \infty $$. Furthermore, by the Central Limit Theorem
 
 $$
 \frac{1}{N}\sum_{n=1}^{N} h(X^{(n)}\overset{d}{\rightarrow} \mathcal{N}\left(E\{h(X)\},\frac{V\left\{(h(X^{(1)})\right\}}{N}\right)
@@ -93,8 +93,8 @@ Wait, so what if we just simulate from something easier (like $$X^{(i)} \sim q(x
 
 1. First,
       * sample $$X^{(n)} \sim q(x)$$, for $$n = 1,\ldots, N$$.
-2. Compute, 
-      * $$\frac{1}{N}\sum_{n=1}^{N} \frac{h(x^{(n)})f(x^{(i)}}{q(x^{(i)})}$$
+2. Then, 
+      * compute $$\frac{1}{N}\sum_{n=1}^{N} \frac{h(x^{(n)})f(x^{(i)}}{q(x^{(i)})}$$
     
 Since we know
 
@@ -144,7 +144,7 @@ E\left(\frac{\pi(X^{(i)})}{q(X^{(i)})}\right)^2 &= \int_{\mathbb{R}} \frac{(\pi(
 \end{aligned}
 $$
 
-I illustrate this in Python below (I use a Monte Carlo estimator to compute $$\int_{\mathbb{R}} \frac{\pi(x^{(i)})}{q(x^{(i)})} \pi(x^{(i)}) dx^{(i)}$$). The intuitive argument is as follows: if we propose from a Cauchy distribution, it is not unlikely to observe some huge value. However, such a huge value is unlikely under the Gaussian distribution. In this case, $$q(x) \approx 0$$ and we have a division by zero problems in the importance ratio, making the weight infinite. Notice that if we reverse the roles of the distributions, then the weights are finite (since the tails of the Cauchy distribution dominate the tails of the normal). 
+I illustrate this in Python below (I use a Monte Carlo estimator to compute $$\int_{\mathbb{R}} \frac{\pi(x^{(i)})}{q(x^{(i)})} \pi(x^{(i)}) dx^{(i)}$$). The intuitive argument is as follows: if we propose from a Cauchy distribution, it is not unlikely to observe some huge value. However, such a huge value is unlikely under the Gaussian distribution. In this case, $$q(x) \approx 0$$ and we have a division by zero problem in the importance ratio, making the weight infinite. Notice that if we reverse the roles of the distributions, then the weights are finite (since the tails of the Cauchy distribution dominate the tails of the normal). 
 
 
 ```python
@@ -184,13 +184,22 @@ plt.legend(['Cauchy PDF', 'Normal PDF'])
 
 There's one possible complication with importance sampling. If we cannot sample from $$f(x)$$, there's usually a good reason why. One common problem in Bayesian statistics is the normalization constant in the posterior distribution.
 
-As an example, suppose we have a normal model $$X \sim f(X | \theta) = \mathcal{N}(\theta, 1)$$ and we assign a Cauchy prior $$\pi(\theta) \sim \mathcal{C}(0,1)$$. The posterior distribution follows from Bayes' rule:
+As an example, suppose we have a normal model with a Cauchy prior: 
+
+$$
+\begin{aligned}
+X \sim f(X | \theta) = \mathcal{N}(\theta, 1) \\
+\pi(\theta) \sim \mathcal{C}(0,1)
+\end{aligned}
+$$
+
+The posterior distribution follows from Bayes' rule:
 
 $$
 \pi(\theta | x) = \frac{f(x | \theta) \pi(\theta)}{\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta}
 $$
 
-What!? How do you compute $\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta$ analytically? This is going to be a problem in our importance sampler estimator, even if $$\theta \sim q(\theta)$$ is easy to sample from:
+What!? How do you compute $$\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta$$ analytically? This is going to be a problem in our importance sampler estimator, even if $$\theta \sim q(\theta)$$ is easy to sample from:
 
 $$
 \frac{1}{N} \frac{1}{\int_{\mathbb{R}}f(x | \theta) \pi(\theta) d\theta}  \sum_{n=1}^{N} \frac{h(\theta^{(n)})f(x | \theta^{(n)}) \pi(\theta^{(n)})}{q(\theta^{(n)})}
@@ -283,7 +292,7 @@ Okay, sorry about that. I have used that fact many times without proving it hah!
 Recall that at time $$t$$ we are interested in drawing samples from 
 
 $$
-\pi(x_{0:t} | y_{0:t}) = \frac{g(y_{t} | x_{t})\pi(x_{0:t}| y_{0:t-1})}{\pi(y_{t} | y_{0:t-1})} ,
+\pi(x_{0:t} | y_{0:t}) = \frac{g(y_{t} | x_{t})\pi(x_{0:t}| y_{0:t-1})}{\pi(y_{t} | y_{0:t-1})} 
 $$
 
 where the denominator $$\pi(y_{t} | y_{0:t-1})$$ is a component from the normalization constant
@@ -292,12 +301,14 @@ $$
 Z_{t} = \int_{X_{0:t}}\pi(x_{0:t},y_{0:t}) dx_{0:t} = \pi(y_{0:t}) = \pi(y_{t} | y_{0:t-1})\pi(y_{0:t-1}) 
 $$
 
-In other words, we cannot practically compute $$\pi(y_{t} | y_{0:t-1})$$. Therefore, we will be unable to directly sample from $$\pi(x_{0:t} | y_{0:t})$$. That's fine, we can use the self-normalized importance sampler!
+In other words, we cannot practically compute $$\pi(y_{t} | y_{0:t-1})$$ . Therefore, we will be unable to directly sample from $$\pi(x_{0:t} | y_{0:t})$$ . That's fine, we can use the self-normalized importance sampler!
 
-Suppose we want to estimate the average value of the state at time $t$. In this case, $$h(X_{0:t}) = X_{0:t}$$ (remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ (it does not have to depend on $$y_{0:t}$$, but it can). Perform the following:
+Suppose we want to estimate the average value of the state at time $$t$$ . In this case, $$h(X_{0:t}) = X_{0:t}$$ (remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ (it does not have to depend on $$y_{0:t}$$, but it can). Perform the following:
 
 1. First, sample from the importance distribution:
+
       * $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ 
+      
 2. Compute the sum below:
 
       * $$\sum_{n=1}^{N} \frac{g(y_{t} | x^{(n)}_{t})\pi(x^{(n)}_{0:t}| y_{0:t-1})}{q(x^{(n)}_{0:t} | y_{0:t})} = \sum_{n=1}^{N} w^{(n)}_{0:t}$$
@@ -307,6 +318,6 @@ Suppose we want to estimate the average value of the state at time $t$. In this 
       * $$\sum_{i=1}^{N} \frac{1}{\sum_{n=1}^{N} w^{(n)}_{0:t}} h(x_{0:t}^{(i)}) \frac{g(y_{t} | x^{(n)}_{t})\pi(x^{(n)}_{0:t}| y_{0:t-1})}{q(x^{(n)}_{0:t} | y_{0:t})} = \sum_{i=1}^{N} \frac{1}{\sum_{n=1}^{N} w^{(n)}_{0:t}} h(x_{0:t}^{(i)}) w^{(n)}_{0:t}$$
       
 
-Of course, this will require that we be able to evaluate $$\pi(x^{(n)}_{0:t}| y_{0:t-1})$$, which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $t=0$, in which we _can_ evaluate $$\pi(x^{(n)}_{0})$$, then work recursively to build up to higher dimensions (more on this in future posts).
+Of course, this will require that we be able to evaluate $$\pi(x^{(n)}_{0:t}| y_{0:t-1})$$, which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $$t=0$$ , in which we _can_ evaluate $$\pi(x^{(n)}_{0})$$, then work recursively to build up to higher dimensions (more on this in future posts).
 
 {% include lib/mathjax.html %}
