@@ -307,7 +307,11 @@ $$
 
 In other words, we cannot practically compute $$\pi(y_{t} | y_{0:t-1})$$ . Therefore, we will be unable to directly sample from $$\pi(x_{0:t} | y_{0:t})$$ . That's fine, we can use the self-normalized importance sampler!
 
-Suppose we want to estimate the average value of the state at time $$t$$ . In this case, $$h(X_{0:t}) = X_{0:t}$$ (remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution 
+Suppose we want to estimate the average value of the state at time $$t$$ . In this case, 
+
+$$h(X_{0:t}) = X_{0:t}$$ 
+
+(remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution 
 
 $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ 
 
