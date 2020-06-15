@@ -299,27 +299,15 @@ $$
 \pi(x_{0:t} | y_{0:t}) = \frac{g(y_{t} | x_{t})\pi(x_{0:t}| y_{0:t-1})}{\pi(y_{t} | y_{0:t-1})} 
 $$
 
-where the denominator 
-
-$$\pi(y_t | y_{0:t-1})$$ 
-
-is a component from the normalization constant
+where the denominator is a component from the normalization constant
 
 $$ 
 Z_{t} = \int_{X_{0:t}}\pi(x_{0:t},y_{0:t}) dx_{0:t} = \pi(y_{0:t}) = \pi(y_{t} | y_{0:t-1})\pi(y_{0:t-1}) 
 $$
 
-In other words, we cannot practically compute 
+In other words, we cannot practically compute $$\pi(y_{t} | y_{0:t-1})$$ . Therefore, we will be unable to directly sample from $$\pi(x_{0:t} | y_{0:t})$$ . That's fine, we can use the self-normalized importance sampler!
 
-$$\pi(y_{t} | y_{0:t-1})$$  
-
-Therefore, we will be unable to directly sample from 
-
-$$\pi(x_{0:t} | y_{0:t})$$  
-
-That's fine, we can use the self-normalized importance sampler!
-
-Suppose we want to estimate the average value of the state at time $$t$$ . In this case, $$h(X_{0:t}) = X_{0:t}$$ (remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ (it does not have to depend on $$y_{0:t}$$, but it can). Perform the following:
+Suppose we want to estimate the average value of the state at time $$t$$ . In this case, $$h(X_{0:t}) = X_{0:t}$$ (remember, this is a $$t+1$$ - dimensional quantity). Then we assign an importance distribution $$X_{0:t} \sim q(x_{0:t} | y_{0:t})$$ (it does not have to depend on $$y_{0:t}$$ , but it can). Perform the following:
 
 1. First,
 
