@@ -301,7 +301,7 @@ $$
 
 where the denominator 
 
-$$\pi(y_{t} | y_{0:t-1})$$ 
+$$\pi(y_t | y_{0:t-1})$$ 
 
 is a component from the normalization constant
 
@@ -311,11 +311,11 @@ $$
 
 In other words, we cannot practically compute 
 
-$$pi(y_{t} | y_{0:t-1})$$  
+$$\pi(y_{t} | y_{0:t-1})$$  
 
 Therefore, we will be unable to directly sample from 
 
-$$\pi(x_{0:t} | y_{0:t})$$ . 
+$$\pi(x_{0:t} | y_{0:t})$$  
 
 That's fine, we can use the self-normalized importance sampler!
 
@@ -342,12 +342,8 @@ Suppose we want to estimate the average value of the state at time $$t$$ . In th
 
 Of course, this will require that we be able to evaluate 
 
-$$\pi(x^{(n)}\_{0:t}| y\_{0:t-1})$$, 
+$$\pi(x_{0:t}^{(n)}| y_{0:t-1})$$  
 
-which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $$t=0$$ , in which we _can_ evaluate 
-
-$$ \pi(x^{(n)}_0) $$, 
-
-then work recursively to build up to higher dimensions (more on this in future posts).
+which itself involves some crazy normalization constant, and _the next_ resulting quantity depends on some crazy normalization constant, and so forth. The way to manage this is to start at $$t=0$$ , in which we _can_ evaluate $$\pi(x_0^{(n)})$$ then work recursively to build up to higher dimensions (more on this in future posts).
 
 {% include lib/mathjax.html %}
