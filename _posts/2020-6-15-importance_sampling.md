@@ -305,7 +305,11 @@ $$
 Z_{t} = \int_{X_{0:t}}\pi(x_{0:t},y_{0:t}) dx_{0:t} = \pi(y_{0:t}) = \pi(y_{t} | y_{0:t-1})\pi(y_{0:t-1}) 
 $$
 
-In other words, we cannot practically compute $$\pi(y_{t} | y_{0:t-1})$$ . Therefore, we will be unable to directly sample from $$\pi(x_{0:t} | y_{0:t})$$ . That's fine, we can use the self-normalized importance sampler!
+In other words, we cannot practically compute 
+
+$$\pi(y_{t} | y_{0:t-1})$$  
+
+Consequently, we cannt sample from the target distribution either. That's fine, we can use the self-normalized importance sampler!
 
 Suppose we want to estimate the average value of the state at time $$t$$ . In this case, 
 
